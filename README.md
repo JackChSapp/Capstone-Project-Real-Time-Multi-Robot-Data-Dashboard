@@ -1,3 +1,14 @@
+Project Members:
+Hussam Abubakr
+Jeana Chapman
+Emiliano de la Garza
+Jewel Littlefield
+Jack Sapp
+Hayla Turney
+
+Project Sponser:
+Dr. Erdemir, Gokhan
+
 EMCS 214
 
 Hiwonder JetAuto Robot Library
