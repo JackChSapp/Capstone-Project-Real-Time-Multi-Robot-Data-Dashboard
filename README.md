@@ -1,6 +1,6 @@
 <h1 align= "center"> Swarm-Sense </h1>
 
-# Project Members
+### Project Members
 Hussam Abubakr: Backend Developer
 
 Jeana Chapman: Scrum Master & POC
@@ -13,7 +13,7 @@ Jack Sapp: Data Storage Developer
 
 Hayla Turney: UI/UX Developer
 
-# Project Sponsor:
+### Project Sponsor:
 Dr. Gokhan Erdemir
 
 ---
