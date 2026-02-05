@@ -1,5 +1,5 @@
 <p align = "center">
-  <img src="readmeBanner.png" width="100%" />
+  <img src="assets and links/readmeBanner.png" width="100%" />
 </p>
 
 <h1 align= "center"> A Real-Time Multi-Robot Data Dashboard for the UTC Robotics Lab </h1>
