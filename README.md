@@ -2,7 +2,7 @@
   <img src="readmeBanner.png" width="100%" />
 </p>
 
-<h1 align= "center"> Swarm-Sense </h1>
+<h1 align= "center"> A Real-Time Multi-Robot Data Dashboard for the UTC Robotics Lab </h1>
 
 ### Project Members
 Hussam Abubakr: Backend Developer
