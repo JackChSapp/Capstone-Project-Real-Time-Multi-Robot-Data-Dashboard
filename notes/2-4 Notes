@@ -1,0 +1,9 @@
+- All robots are open source
+- There are multiple sensor types that need to be displayed on the dashboard
+- Internet connection and bluetooth connection to robots
+
+- MATLAB related:
+  - MATLAB export button
+  - May take time to load
+  - Intializing stops once neon blue
+  
