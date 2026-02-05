@@ -1,3 +1,7 @@
+<p align = "center">
+  <img src="readmeBanner.png" width="100%" />
+</p>
+
 <h1 align= "center"> Swarm-Sense </h1>
 
 ### Project Members
