@@ -56,3 +56,80 @@ Swarm-Sense is a centralized visualization platform designed to connect robotics
 - Comprehensive user documentation
 - System stability and stress testing
 
+## Software Architecture
+The Swarm Sense system architecture is designed for modularity, scalability, and ease of maintenance. The following sections describe the key architectural decisions across five critical areas: Database, Platform, Server, Open-source components, and Development tools
+### Dattabase Architecture
+- Primary Database TBD
+- Secondary Storage: TBD
+- Data Outline:
+  - Measurements: Robot data readings organized by sensor type
+  - Tags: Robot ID, sensor ID, session ID for efficient filtering
+  - Fields: Sensor-specific data
+  - Retention: Configurable data retention policies (possible defaultL 30 days for raw data)
+### Platform Architecture
+- Framework: TBD
+- UI Library: TBD
+- Visualizatoin: TBD
+- Key Platform Features:
+  - Responsive dashboard layout with drag-and-drop widget positioning (have default positioning based on last save/new robot)
+  - Real-time data streaming (specifics TBD)
+  - Component-based architecture for sensor visualizations
+  - State management TBD
+  - (Possible Idea) Progressive Web App capabilities for tablet deployment
+- Deployment: The dashboard will be deployed as a containerized application for easy installation on lab servers
+### Server Architecture
+- Backend:
+  - Language: Python
+  - Framework: TBD
+  - Robot Communication: ROS2 integration
+- Server Components:
+  - Specifics TBD
+### Open-Source Components and Licensing
+| Component | License | Purpose |
+|-----------|---------|---------|
+| TBD | TBD | TBD |
+
+- Licensing Strategy:
+  - TBD
+- Contribution Guidelines:
+  - TBD
+### Development Tools and Workflow
+- Version Control:
+  - System: Git with GitHub repository
+  - Branching Strategy: GitFlow
+  - Pull Request Policy: all code changes require peer review and passing CI checks before merge
+- CI/CD Pipeline:
+  - GitHub actions for automated testing and deployment
+  - Unit tests: TBD
+  - Integration tests: TBD
+- Development Environment:
+  - IDE: VS code
+  - Local Setup: TBD
+  - Documentation: TBD
+- Project Management
+  - Tool: GitHub Projects
+  - Sprint Planning: 2-week sprints with daily EOD standups
+  - Communication: GroupMe for team communication, Email/Zoom for sponsor meetings
+
+## Risk Management
+| Risk | Impact | Probability | Mitigation Strategy |
+|------|--------|-------------|---------------------|
+| TBD | TBD | TBD | TBD |
+
+## Appendix
+### Team Rules & Responsibilites 
+- Jeana Chapman: Scrum Master and POC
+  - Responsibilities: Sprint planning, communication, documentation, cross-functional technical support, timeline management
+- Hussam Abubakr: Backend Developer
+  - Responsibilities: FastAPI implementation, data pipeline, ROS2 integration
+- Emiliano de la Garza: Full Stack Developer
+  - Responsibilities: End-to-end features, API integration, testing
+- Jewel Littlefield: DevOps Developer
+  - Responsibilities: CI/CD pipeline: Docker containers, deployment
+- Jack Sapp: Data Storage Developer
+  - Responsibilities: Database outline, Optimization, MATLAB export
+- Hayla Turney: UI/UX Developer
+  - Responsibilities: Dashboard design, react components, user experience
+
+
+
