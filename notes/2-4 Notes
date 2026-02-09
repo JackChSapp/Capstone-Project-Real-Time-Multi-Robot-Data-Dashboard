@@ -6,4 +6,23 @@
   - MATLAB export button
   - May take time to load
   - Intializing stops once neon blue
+
+- Wants to see all camera views and sensors without having to pick apart the windows
+  - Selected window zooms in when pressed (feature to consider)
+
+- Work on delay, wants almost none. Miliseconds, but preferably no visible delay
+
+- To each robot individually and and drop sensors
+- Mostly interface design
+- Grab data in real time
+
+- Dashboard will be different based on robot
+- Have indication that robot is connected
+- Biweekly meetings preferred. 
+
+- By next meeting, interface design ideas
+
+- Problem presented:
+  - Our sponsor currently has an issue where once he connects the robots and it connect the data is sparsed into small individual windows
+
   
