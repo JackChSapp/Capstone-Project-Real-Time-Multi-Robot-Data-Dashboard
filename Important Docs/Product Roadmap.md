@@ -30,3 +30,29 @@ Swarm-Sense is a centralized visualization platform designed to connect robotics
 | **M7: Release Candidate** | Apr 10, 2026 | Bug fixes, performance optimization | System stable for 30min+ operation |
 | **M8: Conference Presentation** | Apr 15, 2026 | Live demonstration, documentation | Successful conference demo |
 
+## Feature Roadmap
+### Phase 1: Foundation (Feb 11-Feb 28)
+- Network discovery and robot connection protocol
+- Basic data ingestion pipeline for single robot
+- Core databse for sensor data storage
+- Simple command line interface for testing
+- Initial CI/CD pipeline setup
+### Phase 2: Visualization (Mar 1-Mar 15)
+- Real-time dashboard UI
+- Sensor data visualization components
+- Basic data playback funcitonality
+- Connection status monitoring
+- Error logging and debugging interface
+### Phase 3: Data Management (Mar 16-Mar 31)
+- MATLAB export module (.mat file generation)
+- Data recording and session management
+- Time series data compression
+- Data retension policies
+- Export format configuration
+### Phase 4: Scale & Polish (Apr 1-Apr10)
+- Multi-robot connection manager (up to 5 displayed/connected at a time, but more on standby/saved in the system)
+- Performance optimization for concurrent streams
+- Dashboard layout customization
+- Comprehensive user documentation
+- System stability and stress testing
+
