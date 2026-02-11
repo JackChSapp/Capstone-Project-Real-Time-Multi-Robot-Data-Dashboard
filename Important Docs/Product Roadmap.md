@@ -139,7 +139,7 @@ Note: PySide6 (LGPL) allows use in proprietary/open software as long as the libr
 - Emiliano de la Garza: Application Integration (Full Stack)
   - Responsibilities: Connecting UI to ROS backend, Thread management (preventing UI freezes), Main application logic, End-to-end testing.
 - Jewel Littlefield: DevOps & Release Engineer
-  - Responsibilities: CI/CD pipeline: CI/CD pipeline (GitHub Actions), Simulation environment setup, Application packaging (PyInstaller for executable generation).
+  - Responsibilities: CI/CD pipeline (GitHub Actions), Simulation environment setup, Application packaging (PyInstaller for executable generation).
 - Jack Sapp: Data Engineer
   - Responsibilities: In-memory circular buffer implementation, Session caching logic, MATLAB (.mat) file generation and verification.
 - Hayla Turney: UI/UX Developer
