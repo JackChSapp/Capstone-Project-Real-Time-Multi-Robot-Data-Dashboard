@@ -1,5 +1,3 @@
-version: '3.8'
-
 # This is the base compose file. It defines services that are common
 # across all environments or are essential for the project's tooling.
 #
@@ -14,6 +12,8 @@ services:
     build:
       context: ./swarm-sense-extension
       dockerfile: Dockerfile
+    #user: "${UID}:${GID}" #Might add if needed
     volumes:
       # This mounts the 'dist' folder from the container to your local machine.
       - ./swarm-sense-extension/dist:/app/dist
+    command: npm run build

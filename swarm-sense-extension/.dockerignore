@@ -2,3 +2,7 @@ node_modules
 dist
 *.foxe
 .vscode
+.git
+.gitignore
+npm-debug.log*
+.env

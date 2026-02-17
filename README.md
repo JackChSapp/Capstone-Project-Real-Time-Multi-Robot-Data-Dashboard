@@ -62,5 +62,6 @@ Drag and drop the generated `.foxe` file into the Foxglove Studio application to
 The backend services (like ROS) are defined in separate compose files. To start the ROS simulation environment, run:
 
 ```bash
-docker-compose -f docker-compose.yml -f docker-compose.ros.yml up --build
+# The -d flag runs the containers in the background (detached mode).
+docker-compose -f docker-compose.yml -f docker-compose.ros.yml up --build -d
 ```

@@ -1,28 +1,20 @@
-version: '3.8'
-
 # This compose file contains all services related to the ROS environment.
 # It can be run alongside the base docker-compose.yml file.
 
 services:
-  ros-master:
-    image: ros:${ROS_DISTRO:-noetic}-ros-core
-    command: stdbuf -o L roscore
-    networks:
-      - robot-net
-    restart: unless-stopped
+  foxglove-bridge:
+    build:
+      context: .
+      dockerfile: Dockerfile.foxglove
+    container_name: foxglove_bridge
+    network_mode: "host" 
+    restart: always
 
   robot-1-sim:
-    # This assumes you have a Dockerfile in a 'robot_ws' directory
-    # build: ./robot_ws
-    image: ubuntu:20.04 # Placeholder image
-    command: sleep infinity # Placeholder command
+    # Updated to ROS 2 Jazzy (Ubuntu 24.04 base)
+    image: ros:jazzy-ros-base
+    container_name: robot_sim
+    network_mode: "host"
     environment:
-      - ROS_MASTER_URI=http://ros-master:11311
-    networks:
-      - robot-net
-    depends_on:
-      - ros-master
-
-networks:
-  robot-net:
-    driver: bridge
+      - ROS_DOMAIN_ID=0
+    command: sleep infinity
