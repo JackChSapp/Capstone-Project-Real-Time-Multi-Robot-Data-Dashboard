@@ -1,0 +1,19 @@
+version: '3.8'
+
+# This is the base compose file. It defines services that are common
+# across all environments or are essential for the project's tooling.
+#
+# To run this with other services, you can chain files:
+# docker-compose -f docker-compose.yml -f docker-compose.ros.yml up
+
+services:
+  # This service builds the Foxglove extension (.foxe file)
+  # It's a "one-shot" service that you run when you need to build the extension.
+  # Usage: docker-compose run --rm extension-builder
+  extension-builder:
+    build:
+      context: ./swarm-sense-extension
+      dockerfile: Dockerfile
+    volumes:
+      # This mounts the 'dist' folder from the container to your local machine.
+      - ./swarm-sense-extension/dist:/app/dist
