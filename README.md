@@ -63,5 +63,20 @@ The backend services (like ROS) are defined in separate compose files. To start 
 
 ```bash
 # The -d flag runs the containers in the background (detached mode).
-docker-compose -f docker-compose.yml -f docker-compose.ros.yml up --build -d
+docker compose -f docker-compose.yml -f docker-compose.ros.yml up --build -d
+```
+
+```bash
+# Verify the Foxglove Bridge is Alive
+docker logs foxglove_bridge
+```
+
+```bash
+# Verify ROS 2 is Working in the Sim
+docker exec -it robot_sim bash -c "source /opt/ros/jazzy/setup.bash && ros2 topic list"
+```
+
+```bash
+# Send Test Data to your Dashboard
+docker exec -it robot_sim bash -c "source /opt/ros/jazzy/setup.bash && ros2 topic pub /test_topic std_msgs/msg/String 'data: \"Capstone Connection Success\"' -1"
 ```
