@@ -1,4 +1,4 @@
 cmake_minimum_required(VERSION 3.5)
-project(Capstone Robot Dashboard)
+project(swarm_sense_dashboard)
 
 ament_package()
