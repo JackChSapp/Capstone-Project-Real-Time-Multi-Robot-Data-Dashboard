@@ -1,10 +1,9 @@
 # Swarm Sense — To-Do
 
 ## General (Ongoing)
-- [ ] Fix ROS package name in `setup.py` and `CMakeLists.txt` — change `'Capstone Robot Dashboard'` to `'swarm_sense_dashboard'` (ROS does not allow spaces in package names)
-- [ ] Fix `setup.cfg` — replace both `<package-name>` placeholders with `swarm_sense_dashboard`
-- [ ] Fill in `swarm-sense-extension/package.json` fields: set `publisher`, `description`, and bump `version` to `0.1.0`
-- [ ] Check folder name `swarm-sense-entension/` in repo — likely a typo, should be `swarm-sense-extension`
+- [X] Fix ROS package name in `setup.py` and `CMakeLists.txt` — change `'Capstone Robot Dashboard'` to `'swarm_sense_dashboard'` (ROS does not allow spaces in package names)
+- [X] Fix `setup.cfg` — replace both `<package-name>` placeholders with `swarm_sense_dashboard`
+- [X] Fill in `swarm-sense-extension/package.json` fields: set `publisher`, `description`, and bump `version` to `0.1.0`
 
 ---
 
