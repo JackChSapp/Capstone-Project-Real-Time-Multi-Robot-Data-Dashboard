@@ -2,7 +2,7 @@ import os
 from glob import glob
 from setuptools import setup
 
-package_name = 'Capstone Robot Dashboard'
+package_name = 'swarm_sense_dashboard'
 
 setup(
     name=package_name,
