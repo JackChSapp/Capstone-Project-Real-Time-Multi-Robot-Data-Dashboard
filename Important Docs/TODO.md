@@ -21,9 +21,9 @@
 
 - [ ] Install Foxglove Studio on all dev machines (download at https://foxglove.dev/download) → **All**
 - [ ] Install ROS 2 Humble on all dev machines if not already done:
-  `sudo apt install ros-humble-desktop` → **Jewel**
+  `sudo apt install ros-humble-desktop` → **All**
 - [ ] Install foxglove_bridge on all dev machines:
-  `sudo apt install ros-humble-foxglove-bridge` → **Jewel**
+  `sudo apt install ros-humble-foxglove-bridge` → **All**
 - [ ] Finalize wireframe design — select one of the 3 designs and confirm with sponsor → **Hayla**
 - [ ] Build Foxglove Studio layout with 3 panels (Battery, Position, Status) and export as a `.json` file → **Hayla**
 - [ ] Submit wireframe to Dr. Erdemir for sponsor approval → **Jeana**
