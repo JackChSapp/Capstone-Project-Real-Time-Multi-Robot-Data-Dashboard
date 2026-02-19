@@ -26,6 +26,7 @@ setup(
     author_email='Jackchsapp@gmail.com',
     maintainer='Dr. Gokhan Erdemir',
     maintainer_email='gokhan-erdemir@utc.edu',
+    author2_email ='ylq397@mocs.utc.edu',
     keywords=['foo', 'bar'],
     classifiers=[
         'Intended Audience :: Developers',
