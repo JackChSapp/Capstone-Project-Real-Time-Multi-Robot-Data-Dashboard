@@ -4,7 +4,16 @@
 # To run this with other services, you can chain files:
 # docker-compose -f docker-compose.yml -f docker-compose.ros.yml up
 
+  
 services:
+  gazebo:
+    build: .
+    volumes:
+      - ./worlds:/ros_ws/worlds
+      - ./bridge:/ros_ws/bridge
+    ports:
+      - "8765:8765"
+
   # This service builds the Foxglove extension (.foxe file)
   # It's a "one-shot" service that you run when you need to build the extension.
   # Usage: docker-compose run --rm extension-builder
