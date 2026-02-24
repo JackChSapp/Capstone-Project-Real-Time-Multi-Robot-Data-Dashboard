@@ -1,0 +1,215 @@
+{
+  "configById": {
+    "Image!evds6v": {
+      "cameraState": {
+        "distance": 20,
+        "perspective": true,
+        "phi": 60,
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "targetOffset": [
+          0,
+          0,
+          0
+        ],
+        "targetOrientation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "thetaOffset": 60,
+        "fovy": 45,
+        "near": 0.5,
+        "far": 5000
+      },
+      "followMode": "follow-pose",
+      "scene": {},
+      "transforms": {},
+      "topics": {},
+      "layers": {},
+      "publish": {
+        "type": "point",
+        "poseTopic": "/move_base_simple/goal",
+        "pointTopic": "/clicked_point",
+        "poseEstimateTopic": "/initialpose",
+        "poseEstimateXDeviation": 0.5,
+        "poseEstimateYDeviation": 0.5,
+        "poseEstimateThetaDeviation": 0.26179939
+      },
+      "imageMode": {
+        "imageTopic": "/robot1/camera/image_raw"
+      }
+    },
+    "3D!9jgtoi": {
+      "cameraState": {
+        "perspective": true,
+        "distance": 1.6198942163518308,
+        "phi": 60.00000000000029,
+        "thetaOffset": 60.000000000000746,
+        "targetOffset": [
+          0,
+          0,
+          0
+        ],
+        "target": [
+          0,
+          0,
+          0
+        ],
+        "targetOrientation": [
+          0,
+          0,
+          0,
+          1
+        ],
+        "fovy": 45,
+        "near": 0.5,
+        "far": 5000
+      },
+      "followMode": "follow-pose",
+      "scene": {},
+      "transforms": {},
+      "topics": {},
+      "layers": {
+        "grid": {
+          "visible": true,
+          "drawBehind": false,
+          "label": "Grid",
+          "instanceId": "fdc40287-2fd6-47bb-8395-c5e1b01949ee",
+          "layerId": "foxglove.Grid",
+          "size": 10,
+          "divisions": 10,
+          "lineWidth": 1,
+          "color": "#248eff",
+          "position": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ]
+        }
+      },
+      "publish": {
+        "type": "point",
+        "poseTopic": "/move_base_simple/goal",
+        "pointTopic": "/clicked_point",
+        "poseEstimateTopic": "/initialpose",
+        "poseEstimateXDeviation": 0.5,
+        "poseEstimateYDeviation": 0.5,
+        "poseEstimateThetaDeviation": 0.26179939
+      },
+      "imageMode": {}
+    },
+    "Gauge!41mkyig": {
+      "path": "",
+      "style": "bar",
+      "minValue": 0,
+      "maxValue": 100,
+      "colorMap": "red-yellow-green",
+      "colorMode": "colormap",
+      "gradient": [
+        "#0000ff",
+        "#ff00ff"
+      ],
+      "reverse": false,
+      "reverseDirection": false,
+      "foxglovePanelTitle": "Battery Percentage"
+    },
+    "RosOut!351qnx5": {
+      "minLogLevel": 2,
+      "preload": true,
+      "searchTerms": [],
+      "nameFilter": {},
+      "fontSize": 12,
+      "topicToRender": "/rosout",
+      "foxglovePanelTitle": "Current Status"
+    },
+    "RawMessages!972t20": {
+      "topicPath": "/robot1/odom.pose.pose.position",
+      "fontSize": 24,
+      "diffEnabled": false
+    },
+    "Tab!erj816": {
+      "activeTabIdx": 0,
+      "tabs": [
+        {
+          "title": "Overview",
+          "layout": {
+            "first": "Image!evds6v",
+            "second": "3D!9jgtoi",
+            "direction": "column",
+            "splitPercentage": 71.37320465080933
+          }
+        }
+      ]
+    },
+    "Stack!1nol4s2": {
+      "panels": [
+        {
+          "panelId": "Gauge!41mkyig",
+          "size": 0.31400000000000006
+        },
+        {
+          "panelId": "RosOut!351qnx5",
+          "size": 0.43300508997858334
+        },
+        {
+          "panelId": "RawMessages!972t20",
+          "size": 0.2980577474101831
+        }
+      ],
+      "foxglovePanelTitle": "PlaceHolder for Battery/Status/Position"
+    },
+    "Plot!4cpkntz": {
+      "foxglovePanelTitle": "Acceleration (x,y,z)",
+      "paths": [
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/robot1/imu.linear_acceleration.x",
+          "enabled": true,
+          "color": "#4e98e2",
+          "id": "377ad817-d392-4e89-9c29-034739aeff37",
+          "showLine": true
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/robot1/imu.linear_acceleration.y",
+          "enabled": true,
+          "color": "#f5774d",
+          "id": "16272d59-81ed-41d7-8683-0442eae1d96d"
+        },
+        {
+          "timestampMethod": "receiveTime",
+          "value": "/robot1/imu.linear_acceleration.z",
+          "enabled": true,
+          "color": "#f7df71",
+          "id": "28aab4f4-7e83-4500-8c7b-378d3235d237"
+        }
+      ],
+      "isSynced": true
+    }
+  },
+  "layout": {
+    "first": "Tab!erj816",
+    "second": {
+      "first": "Stack!1nol4s2",
+      "second": "Plot!4cpkntz",
+      "direction": "column",
+      "splitPercentage": 69.44790673803065
+    },
+    "direction": "row"
+  },
+  "globalVariables": {},
+  "playbackConfig": {
+    "speed": 1
+  },
+  "userNodes": {}
+}
