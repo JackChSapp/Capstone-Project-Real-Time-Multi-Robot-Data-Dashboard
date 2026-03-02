@@ -59,7 +59,7 @@ Drag and drop the generated `.foxe` file into the Foxglove Studio application to
 
 ### 3. Running the Gazebo Simulation
 
-The `gazebo` service runs a headless Gazebo simulation with a TurtleBot3 Burger, bridges its sensor topics to ROS 2, and exposes a Foxglove WebSocket bridge on port `8765`.
+The `gazebo` service runs a headless Gazebo simulation with a TurtleBot3 Waffle, bridges its sensor topics (including camera, LiDAR, IMU, and odometry) to ROS 2, and exposes a Foxglove WebSocket bridge on port `8765`.
 
 ```bash
 # Build and start the gazebo service (logs stream to terminal)
