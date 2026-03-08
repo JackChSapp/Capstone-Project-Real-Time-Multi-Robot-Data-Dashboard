@@ -58,9 +58,4 @@ All of the following must be true by 3/11:
 
 ## Completed ✅
 
-- [x] Create product roadmap → Jeana (2/10)
-- [x] Create product backlog → All (2/11)
-- [x] Plan Sprint 1 → All (2/11)
-- [x] Create dashboard mockup designs (3 options) → Hayla
-- [x] Initialize GitHub repo with Foxglove extension scaffold
-- [x] Draft architecture document
+
