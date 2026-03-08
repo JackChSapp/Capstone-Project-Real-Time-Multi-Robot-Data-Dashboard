@@ -4,9 +4,13 @@
 ## Sprint 2 — Week of 3/9
 
 > **Sprint 2 Wrap-Up**
+> 
 > We are meeting with Dr. Gokhan on Monday (3/9) for a progress review. 10 AM in the robotics lab.
+> 
 > Sprint 2 report is due Wednesday 3/11
+> 
 > There will be a project update for the entire class on Wednesday 3/11 during class time. The assignment for this is due Tuesday at midnight.
+> 
 > Sprint 3 plan is due after spring break. Will try to get it done before Friday 3/13 so Gokhan and team members can review <- Jeana
 
 ---
