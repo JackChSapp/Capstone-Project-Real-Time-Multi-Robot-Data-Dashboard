@@ -1,0 +1,26 @@
+This is a file containing documentation on how to download React and test the dashboard.
+
+For starters, we'll need to download React onto our terminal. 
+
+Next we'll need to run the 3 following commands: 
+command: node -v 
+command: npm -v 
+command: npm create vite@latest my-react-app -- --template react **
+
+When this download reaches completion it should ask what you would like to download. 
+
+Click "Typescript + React" 
+
+**We will not use this template. This is just to make sure React is on your machine 
+
+Assuming that you've cloned the repository: type ' cd Capstone-Project-Real-Time-Multi-Robot-Data-Dashboard/src '.
+
+Within this folder (which should contain the frontend files), use 
+command: npm install 
+to download the dependencies for React. 
+
+Once everything is downloaded, run 
+command: npm run dev
+to run the dashabord! 
+
+Please contact me on GroupMe @HaylaTurney or my school email ylq397@mocs.utc.edu. If there are any questions or trouble!
