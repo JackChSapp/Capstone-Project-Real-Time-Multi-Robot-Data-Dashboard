@@ -12,8 +12,8 @@ RUN apt-get update && apt-get install -y curl gnupg lsb-release \
        $(lsb_release -cs) main" \
        > /etc/apt/sources.list.d/gazebo-stable.list
 
-# Install the bridge
-# We verify the package name is 'ros-jazzy-foxglove-bridge' per the docs
+
+# Install Core ROS–Gazebo and Foxglove bridge packages
 RUN apt-get update && apt-get install -y \
     ros-jazzy-foxglove-bridge \
     ros-jazzy-ros-gz \
@@ -27,7 +27,8 @@ RUN apt-get update && apt-get install -y \
 # # Set the default launch command
 # CMD ["ros2", "launch", "foxglove_bridge", "foxglove_bridge_launch.xml"]
 
-# Source ROS automatically in every shell
+#Source ROS automatically in every shell
+## Additional ROS–Gazebo tooling and messages, plus Foxglove H.264 transport
 RUN apt-get update && apt-get install -y \
     ros-jazzy-ros-gz \
     ros-jazzy-foxglove-bridge \
@@ -37,6 +38,8 @@ RUN apt-get update && apt-get install -y \
     ros-jazzy-sensor-msgs \
     ros-jazzy-nav-msgs \
     ros-jazzy-tf2-ros \
+    # compressed vt 03/15/26 - Emiliano
+    ros-jazzy-foxglove-compressed-video-transport \
     gz-harmonic \
     python3-colcon-common-extensions \
     && rm -rf /var/lib/apt/lists/*
