@@ -1,13 +1,19 @@
-export const rosSocket = new WebSocket("ws://localhost:8765");
+const socket = new WebSocket("ws://127.0.0.1:8765", [
+  "foxglove.sdk.v1",
+  "foxglove.websocket.v1",
+]);
 
-rosSocket.onopen = () => {
-  console.log("Connected to Foxglove Bridge");
+socket.onopen = () => {
+  console.log("WebSocket opened");
+  console.log("Negotiated protocol:", socket.protocol);
 };
 
-rosSocket.onmessage = (event) => {
-  console.log("ROS message:", event.data);
+socket.onmessage = (event) => {
+  console.log("First message from bridge:", event.data);
 };
 
-rosSocket.onerror = (err) => {
-  console.error("WebSocket error:", err);
+socket.onerror = (event) => {
+  console.error("WebSocket error:", event);
 };
+
+//export {};
