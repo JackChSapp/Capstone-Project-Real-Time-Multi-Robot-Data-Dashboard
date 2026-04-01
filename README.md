@@ -57,26 +57,42 @@ docker-compose run --rm extension-builder
 
 Drag and drop the generated `.foxe` file into the Foxglove Studio application to install it.
 
-### 3. Running Backend Services
+### 3. Running the Gazebo Simulation
 
-The backend services (like ROS) are defined in separate compose files. To start the ROS simulation environment, run:
+The `gazebo` service runs a headless Gazebo simulation with a TurtleBot3 Waffle, bridges its sensor topics (including camera, LiDAR, IMU, and odometry) to ROS 2, and exposes a Foxglove WebSocket bridge on port `8765`.
 
 ```bash
-# The -d flag runs the containers in the background (detached mode).
-docker compose -f docker-compose.yml -f docker-compose.ros.yml up --build -d
+# Build and start the gazebo service (logs stream to terminal)
+docker compose up --build gazebo
 ```
 
 ```bash
-# Verify the Foxglove Bridge is Alive
-docker logs foxglove_bridge
+# Or run it in the background
+docker compose up --build -d gazebo
 ```
 
-```bash
-# Verify ROS 2 is Working in the Sim
-docker exec -it robot_sim bash -c "source /opt/ros/jazzy/setup.bash && ros2 topic list"
-```
+Once running, the following ROS 2 topics are available:
+
+| Topic | Message Type |
+|---|---|
+| `/robot1/camera/image_raw` | `sensor_msgs/Image` |
+| `/robot1/odom` | `nav_msgs/Odometry` |
+| `/robot1/scan` | `sensor_msgs/LaserScan` |
+| `/robot1/imu` | `sensor_msgs/Imu` |
+| `/clock` | `rosgraph_msgs/Clock` |
 
 ```bash
-# Send Test Data to your Dashboard
-docker exec -it robot_sim bash -c "source /opt/ros/jazzy/setup.bash && ros2 topic pub /test_topic std_msgs/msg/String 'data: \"Capstone Connection Success\"' -1"
+# Check that the service is running and the bridge is up
+docker compose logs gazebo
 ```
+
+### 4. Connecting with Foxglove Studio
+
+1. Open [Foxglove Studio](https://app.foxglove.dev) (browser or desktop app)
+2. Click **Open connection**
+3. Select **Foxglove Websocket**
+4. Enter the URL: `ws://localhost:8765`
+5. Click **Open**
+
+You should see the topics listed above appear in the data source panel. To visualize sensor data, add panels from the **Add panel** menu (e.g. **3D** for the laser scan, **Image** for the camera feed, **Plot** for IMU/odometry values).
+

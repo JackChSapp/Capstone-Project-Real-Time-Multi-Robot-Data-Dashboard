@@ -7,10 +7,11 @@
   
 services:
   gazebo:
-    build: .
+    build:
+      context: ./gazebo
     volumes:
-      - ./worlds:/ros_ws/worlds
-      - ./bridge:/ros_ws/bridge
+      - ./gazebo/worlds:/ros_ws/worlds
+      - ./gazebo/bridge:/ros_ws/bridge
     ports:
       - "8765:8765"
 
