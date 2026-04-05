@@ -1,0 +1,70 @@
+.dashboard-container {
+  width: 100%;
+  height: 100vh;
+  background-color: #00386B;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-title {
+  color: #E0AA0F;
+  font-size: 28px;
+  text-align: center;
+}
+
+.robot-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.robot-button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 2px solid rgba(224, 170, 15, 0.3);
+  background-color: #00386B;
+  color: white;
+  cursor: pointer;
+}
+
+.robot-button.active {
+  background-color: #E0AA0F;
+  color: #00386B;
+  font-weight: bold;
+}
+
+.grid-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.panel {
+  border: 2px solid #E0AA0F;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.panel.large {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.panel-title {
+  color: #E0AA0F;
+  margin-bottom: 10px;
+}
