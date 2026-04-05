@@ -1,9 +1,7 @@
-import "./services/rosConnection"; //test
-import Dashboard from "./pages/Dashboard"; //import dashboard
-
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-  return <Dashboard />; 
+  return <Dashboard />;
 }
 
 export default App;
