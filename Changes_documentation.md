@@ -71,6 +71,12 @@ If the socket **closes** before any protocol traffic, the UI treats that as a re
 
 **Reconnect:** On close, a timer bumps a `retryToken` so `useEffect` re-runs and opens a fresh connection (useful when the container restarts).
 
+### Intermittent reconnect-loop fix (Apr 2026)
+
+An intermittent issue caused the status to flip between connected/disconnected roughly every 2 seconds. Root cause: the hook scheduled auto-reconnect even during intentional cleanup (`client.close()` in the `useEffect` return). In development, React `StrictMode` mounts/unmounts effects to detect side effects, which made this behavior more visible and could sustain the reconnect loop.
+
+`src/services/rosConnection.ts` now uses an `isShuttingDown` guard so shutdown-triggered `error`/`close` events do not update UI state or schedule reconnects. Unexpected bridge disconnects still trigger retries. The reconnect timer is also reset after it fires, preventing stale timer state.
+
 ---
 
 ## 5. Subscriptions, topics, and camera path
@@ -165,4 +171,4 @@ npm run preview
 
 ## 11. Verification
 
-`npm run build` (`tsc -b && vite build`) completes successfully with the current `rosConnection` implementation (including unsubscribe-on-unadvertise and guarded `buildReader`).
+`npm run build` (`tsc -b && vite build`) completes successfully with the current `rosConnection` implementation (including unsubscribe-on-unadvertise, guarded `buildReader`, and shutdown-safe reconnect logic).

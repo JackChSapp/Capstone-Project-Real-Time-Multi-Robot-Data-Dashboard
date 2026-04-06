@@ -105,13 +105,19 @@ export function useFoxgloveDashboard(url: string) {
     let hasConfirmedProtocolTraffic = false;
     let socketOpened = false;
     let reconnectTimeout: number | undefined;
+    let isShuttingDown = false;
 
     const scheduleReconnect = () => {
+      if (isShuttingDown) {
+        return;
+      }
+
       if (reconnectTimeout != null) {
         return;
       }
 
       reconnectTimeout = window.setTimeout(() => {
+        reconnectTimeout = undefined;
         setRetryToken((current) => current + 1);
       }, RECONNECT_DELAY_MS);
     };
@@ -149,6 +155,10 @@ export function useFoxgloveDashboard(url: string) {
     });
 
     client.on("error", (error) => {
+      if (isShuttingDown) {
+        return;
+      }
+
       if (hasConfirmedProtocolTraffic) {
         return;
       }
@@ -166,6 +176,10 @@ export function useFoxgloveDashboard(url: string) {
     });
 
     client.on("close", (event) => {
+      if (isShuttingDown) {
+        return;
+      }
+
       setState((current) => ({
         ...current,
         status: hasConfirmedProtocolTraffic ? "disconnected" : "error",
@@ -364,8 +378,11 @@ export function useFoxgloveDashboard(url: string) {
     });
 
     return () => {
+      isShuttingDown = true;
+
       if (reconnectTimeout != null) {
         window.clearTimeout(reconnectTimeout);
+        reconnectTimeout = undefined;
       }
 
       client.close();
