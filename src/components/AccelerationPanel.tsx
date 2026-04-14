@@ -1,9 +1,37 @@
+import type { ImuSnapshot } from "../types/foxglove";
+import { formatFloat } from "../utils/foxglove";
 
-export default function AccelerationPanel() {
+type AccelerationPanelProps = {
+  imu: ImuSnapshot | null;
+  lastUpdated?: string;
+};
+
+export default function AccelerationPanel({
+  imu,
+  lastUpdated,
+}: AccelerationPanelProps) {
   return (
-    <div style={{ border: "1px solid gray", padding: "10px" }}>
-      <h2>The Acceleration Panel</h2>
-      <p>This will contain data from the robot1/imu to display the acceleration's live data through a dotted graph. </p>
-    </div>
+    <>
+      <p style={{ fontSize: 13, color: "rgba(255,255,255,0.8)", margin: "0 0 8px" }}>
+        Linear acceleration: <code style={{ color: "#E0AA0F" }}>/robot1/imu</code>
+      </p>
+      <div className="live-metric-grid">
+        <div className="live-metric">
+          <span>Ax</span>
+          <strong>{formatFloat(imu?.x ?? null)}</strong>
+        </div>
+        <div className="live-metric">
+          <span>Ay</span>
+          <strong>{formatFloat(imu?.y ?? null)}</strong>
+        </div>
+        <div className="live-metric">
+          <span>Az</span>
+          <strong>{formatFloat(imu?.z ?? null)}</strong>
+        </div>
+      </div>
+      <p className="live-footnote">
+        Last update: {lastUpdated ?? "No IMU yet"}
+      </p>
+    </>
   );
 }
