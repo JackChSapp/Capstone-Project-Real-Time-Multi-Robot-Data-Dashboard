@@ -15,6 +15,14 @@ services:
     ports:
       - "8765:8765"
 
+  dashboard:
+    build:
+      context: ./dashboard
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_FOXGLOVE_WS_URL=ws://localhost:8765
+
   # This service builds the Foxglove extension (.foxe file)
   # It's a "one-shot" service that you run when you need to build the extension.
   # Usage: docker-compose run --rm extension-builder
