@@ -20,26 +20,150 @@
   text-align: center;
 }
 
-.robot-buttons {
+.toolbar {
   display: flex;
-  justify-content: center;
-  gap: 12px;
+  justify-content: flex-end;
   margin-bottom: 20px;
 }
 
-.robot-button {
+.record-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   padding: 10px 20px;
   border-radius: 8px;
   border: 2px solid rgba(224, 170, 15, 0.3);
   background-color: #00386B;
   color: white;
   cursor: pointer;
+  font-size: 14px;
 }
 
-.robot-button.active {
+.record-btn:hover {
+  border-color: #E0AA0F;
+}
+
+.record-btn.recording {
+  border-color: rgba(231, 76, 60, 0.6);
+  color: #e74c3c;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.record-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #e74c3c;
+  animation: pulse 1.2s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.record-dropdown {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  width: 280px;
+  background-color: #002a52;
+  border: 2px solid #E0AA0F;
+  border-radius: 8px;
+  padding: 12px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.record-dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #E0AA0F;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.record-toggle-all {
+  background: none;
+  border: 1px solid rgba(224, 170, 15, 0.4);
+  color: #E0AA0F;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.record-toggle-all:hover {
+  background-color: rgba(224, 170, 15, 0.1);
+}
+
+.record-topic-list {
+  max-height: 200px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.record-topic-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: white;
+  cursor: pointer;
+  padding: 3px 0;
+}
+
+.record-topic-row:hover {
+  color: #E0AA0F;
+}
+
+.record-empty {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  margin: 8px 0;
+}
+
+.record-start-btn {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
   background-color: #E0AA0F;
   color: #00386B;
   font-weight: bold;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+.record-start-btn:hover:not(:disabled) {
+  background-color: #f0bc1a;
+}
+
+.record-start-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.record-output {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 4px;
+  text-align: right;
+  word-break: break-all;
+}
+
+.record-error {
+  font-size: 11px;
+  color: #e74c3c;
+  margin-top: 4px;
+  text-align: right;
 }
 
 .grid-container {

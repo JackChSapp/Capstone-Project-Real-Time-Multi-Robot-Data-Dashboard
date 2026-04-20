@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "./appStyle.css";
 
 import CameraFeed from "../components/CameraFeed";
@@ -6,15 +5,13 @@ import PositionPanel from "../components/PositionPanel";
 import BatteryPanel from "../components/BatteryPanel";
 import AccelerationPanel from "../components/AccelerationPanel";
 import StatusPanel from "../components/StatusPanel";
+import RecordButton from "../components/RecordButton";
 import {
   getFoxgloveWebSocketUrl,
   useFoxgloveDashboard,
 } from "../services/rosConnection";
 
 export default function Dashboard(): React.ReactElement {
-  const [selectedRobot, setSelectedRobot] = useState<string>("Robot 1");
-  const robots: string[] = ["Export .mat"];
-
   const foxgloveUrl = getFoxgloveWebSocketUrl();
   const foxglove = useFoxgloveDashboard(foxgloveUrl);
 
@@ -36,16 +33,8 @@ export default function Dashboard(): React.ReactElement {
         Hussam Abubakr | Jeana Chapman | Emiliano de la Garza | Jewel Littlefield | Jack Sapp | Hayla Turney
       </p>
 
-      <div className="robot-buttons">
-        {robots.map((robot: string) => (
-          <button
-            key={robot}
-            onClick={() => setSelectedRobot(robot)}
-            className={`robot-button ${selectedRobot === robot ? "active" : ""}`}
-          >
-            {robot}
-          </button>
-        ))}
+      <div className="toolbar">
+        <RecordButton topics={foxglove.discoveredTopics} wsUrl={foxgloveUrl} />
       </div>
 
       <div className="grid-container">
