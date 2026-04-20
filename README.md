@@ -35,64 +35,64 @@ Academic researchers and automated technology managers are the target customers 
 
 This project uses [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to create a consistent and portable development environment. Please install them before proceeding.
 
-### 1. Initial Configuration
+### 1. Start all services
 
-The project uses an environment file to manage configuration.
-
-```bash
-# Create a local environment file from the example template.
-cp .env.example .env
-```
-
-You can customize variables in the `.env` file as needed.
-
-### 2. Building the Foxglove Extension
-
-The `swarm-sense-extension` is the custom panel for the Foxglove dashboard. To build it, run the following command from the project root:
+From the project root, build and start the simulation, dashboard, and recorder in one command:
 
 ```bash
-# This will build the extension and place the .foxe file in swarm-sense-extension/dist/
-docker-compose run --rm extension-builder
+docker compose up --build gazebo dashboard mcap-recorder
 ```
 
-Drag and drop the generated `.foxe` file into the Foxglove Studio application to install it.
+This starts three services:
 
-### 3. Running the Gazebo Simulation
+| Service | Port | Description |
+|---|---|---|
+| `gazebo` | `8765` | Headless Gazebo simulation + Foxglove WebSocket bridge |
+| `dashboard` | `5173` | React dashboard |
+| `mcap-recorder` | `8000` | MCAP recording API |
 
-The `gazebo` service runs a headless Gazebo simulation with a TurtleBot3 Waffle, bridges its sensor topics (including camera, LiDAR, IMU, and odometry) to ROS 2, and exposes a Foxglove WebSocket bridge on port `8765`.
+### 2. Open the dashboard
+
+Navigate to **[http://localhost:5173](http://localhost:5173)** in your browser. The dashboard will connect automatically to the simulation and begin displaying live sensor data.
+
+### 3. Record sensor data
+
+Click the **● Record** button in the top-right corner of the dashboard. A dropdown will appear listing all topics currently advertised by the simulation — all are selected by default. Choose the topics you want to capture and click **Start Recording**.
+
+Click **■ Stop** to finalize the recording. The output `.mcap` file is saved to the `recordings/` directory at the project root.
+
+To record via the API directly:
 
 ```bash
-# Build and start the gazebo service (logs stream to terminal)
-docker compose up --build gazebo
+# Start recording all topics
+curl -X POST http://localhost:8000/start \
+  -H "Content-Type: application/json" \
+  -d '{"ws_url": "ws://localhost:8765"}'
+
+# Start recording specific topics
+curl -X POST http://localhost:8000/start \
+  -H "Content-Type: application/json" \
+  -d '{"ws_url": "ws://localhost:8765", "topics": ["/robot1/odom", "/robot1/imu", "/clock"]}'
+
+# Check recording status
+curl http://localhost:8000/status
+
+# Stop recording
+curl -X POST http://localhost:8000/stop
 ```
 
-```bash
-# Or run it in the background
-docker compose up --build -d gazebo
-```
+---
 
-Once running, the following ROS 2 topics are available:
+### Supplemental: Connecting with Foxglove Studio
 
-| Topic | Message Type |
-|---|---|
-| `/robot1/camera/image_raw` | `sensor_msgs/Image` |
-| `/robot1/odom` | `nav_msgs/Odometry` |
-| `/robot1/scan` | `sensor_msgs/LaserScan` |
-| `/robot1/imu` | `sensor_msgs/Imu` |
-| `/clock` | `rosgraph_msgs/Clock` |
+Recorded `.mcap` files and the live WebSocket bridge can both be opened in [Foxglove Studio](https://app.foxglove.dev) for deeper inspection.
 
-```bash
-# Check that the service is running and the bridge is up
-docker compose logs gazebo
-```
+**Live connection:**
+1. Open Foxglove Studio (browser or desktop app)
+2. Click **Open connection** → **Foxglove WebSocket**
+3. Enter `ws://localhost:8765` and click **Open**
 
-### 4. Connecting with Foxglove Studio
-
-1. Open [Foxglove Studio](https://app.foxglove.dev) (browser or desktop app)
-2. Click **Open connection**
-3. Select **Foxglove Websocket**
-4. Enter the URL: `ws://localhost:8765`
-5. Click **Open**
-
-You should see the topics listed above appear in the data source panel. To visualize sensor data, add panels from the **Add panel** menu (e.g. **3D** for the laser scan, **Image** for the camera feed, **Plot** for IMU/odometry values).
+**Replay a recording:**
+1. Click **Open local file**
+2. Select any `.mcap` file from the `recordings/` directory
 
