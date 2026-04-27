@@ -12,3 +12,5 @@ dist
 
 # IDE / Editor specific
 .vscode/
+
+recordings/
