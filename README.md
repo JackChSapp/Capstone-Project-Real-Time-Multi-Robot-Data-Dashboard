@@ -18,9 +18,9 @@
 2. Under **Assets**, download `Swarm Sense Setup.exe`
 3. Run the installer — no additional setup required
 4. Launch **Swarm Sense** from your Start Menu or Desktop shortcut
-5. In the app, click **⚙ Settings → Connection** and enter your Foxglove bridge URL (default: `ws://127.0.0.1:8765`)
+5. Click **⚙ Settings → Connection** and enter your robot's Foxglove WebSocket URL (e.g. `ws://192.168.1.42:8765`)
 
-> **Note:** The robotics simulation stack (Docker) must be running separately for live data to appear. See [Development Setup](#development-environment-setup) below.
+> **No Docker required** to run the dashboard or connect to a real robot. Docker is only needed if you want to run the built-in Gazebo simulation or use the MCAP recording feature — see below.
 
 ---
 
@@ -58,76 +58,22 @@
 
 ---
 
-## Development Environment Setup
+## What Requires Docker?
 
-This project uses [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/). Install both before proceeding.
+| Feature | Requires Docker? |
+|---|---|
+| Running the dashboard (.exe) | ❌ No |
+| Connecting to a real robot | ❌ No |
+| Gazebo simulation (development/testing) | ✅ Yes |
+| MCAP recording (Record button) | ✅ Yes — the recorder service must be running on your dashboard PC |
 
-### 1. Start all services
-
-From the project root:
-
-```bash
-docker compose up --build gazebo dashboard mcap-recorder
-```
-
-| Service | Port | Description |
-|---|---|---|
-| `gazebo` | `8765` | Headless Gazebo simulation + Foxglove WebSocket bridge |
-| `dashboard` | `5173` | React dashboard (web version) |
-| `mcap-recorder` | `8000` | MCAP recording API |
-
-### 2. Open the dashboard
-
-Navigate to **[http://localhost:5173](http://localhost:5173)** in your browser.
-
----
-
-## Building the Desktop App (.exe / .dmg)
-
-Requirements: [Node.js 18+](https://nodejs.org/)
-
-```bash
-cd dashboard
-npm install --legacy-peer-deps
-npm run electron:build
-```
-
-The installer is output to `dashboard/electron-dist/`:
-- **Windows:** `Swarm Sense Setup.exe`
-- **macOS:** `Swarm Sense.dmg`
-
-To run the desktop app locally without building an installer:
-
-```bash
-npm run electron:dev
-```
-
----
-
-## Recording Sensor Data
-
-Click **● Record** in the top-right corner of the dashboard. Select the topics to capture and click **Start Recording**. Click **■ Stop** to finalize — the `.mcap` file is saved to `recordings/`.
-
-To record via the API directly:
-
-```bash
-# Start recording all topics
-curl -X POST http://localhost:8000/start \
-  -H "Content-Type: application/json" \
-  -d '{"ws_url": "ws://localhost:8765"}'
-
-# Stop recording
-curl -X POST http://localhost:8000/stop
-
-# Check status
-curl http://localhost:8000/status
-```
+For most real-robot use, you only need the `.exe` and the Foxglove bridge running on each robot.
 
 ---
 
 ## Connecting a Real Robot
 
-Swarm Sense connects to any ROS robot running the **Foxglove WebSocket bridge**. Install it on the robot's computer (not your dashboard machine), then point Swarm Sense at the robot's IP address.
+Swarm Sense connects to any ROS robot running the **Foxglove WebSocket bridge**. Install the bridge on the robot (not your dashboard PC), then point Swarm Sense at the robot's IP.
 
 ### ROS 2
 
@@ -163,22 +109,91 @@ To change the port:
 roslaunch foxglove_bridge foxglove_bridge.launch port:=8765
 ```
 
-### Connecting Swarm Sense to the robot
+### Connect Swarm Sense to the Robot
 
 Once the bridge is running on the robot:
 
-1. Find the robot's IP address (e.g. `192.168.1.42`) — run `hostname -I` on the robot
+1. Find the robot's IP address — run `hostname -I` on the robot (e.g. `192.168.1.42`)
 2. Open **⚙ Settings → Connection** in Swarm Sense
 3. Enter `ws://<robot-ip>:8765` (e.g. `ws://192.168.1.42:8765`)
 4. Click **Connect**
 
-> **Tip:** Both the dashboard computer and the robot must be on the **same local network** (lab WiFi or Ethernet). If the dashboard is running in Docker, use the host machine's LAN IP, not `127.0.0.1`.
+> **Tip:** Both the dashboard PC and the robot must be on the **same local network** (lab WiFi or Ethernet).
 
-### Firewall note
+### Firewall Note
 
 If the connection fails, make sure port `8765` is open on the robot:
 ```bash
 sudo ufw allow 8765/tcp
+```
+
+---
+
+## Development Environment Setup
+
+This section covers running the Gazebo simulation and MCAP recorder locally for development and testing. This requires [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/).
+
+### Start All Services
+
+From the project root:
+
+```bash
+docker compose up --build gazebo dashboard mcap-recorder
+```
+
+| Service | Port | Description |
+|---|---|---|
+| `gazebo` | `8765` | Headless Gazebo simulation + Foxglove WebSocket bridge |
+| `dashboard` | `5173` | React dashboard (web version) |
+| `mcap-recorder` | `8000` | MCAP recording API |
+
+### Open the Dashboard
+
+Navigate to **[http://localhost:5173](http://localhost:5173)** in your browser.
+
+---
+
+## Building the Desktop App (.exe / .dmg)
+
+Requirements: [Node.js 18+](https://nodejs.org/)
+
+```bash
+cd dashboard
+npm install --legacy-peer-deps
+npm run electron:build
+```
+
+The installer is output to `dashboard/electron-dist/`:
+- **Windows:** `Swarm Sense Setup.exe`
+- **macOS:** `Swarm Sense.dmg`
+
+To run the desktop app locally without building an installer:
+
+```bash
+npm run electron:dev
+```
+
+---
+
+## Recording Sensor Data
+
+Click **● Record** in the top-right corner of the dashboard. Select the topics to capture and click **Start Recording**. Click **■ Stop** to finalize — the `.mcap` file is saved to `recordings/`.
+
+> **Note:** The MCAP recorder requires the `mcap-recorder` Docker service to be running (`docker compose up mcap-recorder`). This applies whether you are using the simulation or a real robot.
+
+To record via the API directly:
+
+```bash
+# Start recording all topics
+curl -X POST http://localhost:8000/start \
+  -H "Content-Type: application/json" \
+  -d '{"ws_url": "ws://localhost:8765"}'
+
+# Stop recording
+curl -X POST http://localhost:8000/stop
+
+# Check status
+curl http://localhost:8000/status
 ```
 
 ---
