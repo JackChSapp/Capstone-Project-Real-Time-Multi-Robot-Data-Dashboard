@@ -31,7 +31,7 @@
   "main": "electron/main.cjs",
   "build": {
     "appId": "edu.utc.swarm-sense",
-    "productName": "SwarmSense",
+    "productName": "Swarm Sense",
     "directories": {
       "output": "electron-dist"
     },
@@ -42,7 +42,7 @@
     ],
     "win": {
       "target": "nsis",
-      "icon": "public/icons/icon.ico"
+      "icon": "public/icons/icon-512.png"
     },
     "mac": {
       "target": "dmg",
@@ -50,9 +50,7 @@
     },
     "nsis": {
       "oneClick": false,
-      "allowToChangeInstallationDirectory": true,
-      "installerIcon": "public/icons/icon.ico",
-      "uninstallerIcon": "public/icons/icon.ico"
+      "allowToChangeInstallationDirectory": true
     },
     "asar": false
   }
