@@ -1,19 +1,24 @@
 import "./appStyle.css";
 
-import CameraFeed from "../components/CameraFeed";
-import PositionPanel from "../components/PositionPanel";
-import BatteryPanel from "../components/BatteryPanel";
-import AccelerationPanel from "../components/AccelerationPanel";
-import StatusPanel from "../components/StatusPanel";
+import { useState } from "react";
+
+import PanelGrid from "../components/PanelGrid";
+import PanelSelector from "../components/PanelSelector";
 import RecordButton from "../components/RecordButton";
+import SettingsPanel, { loadSavedWsUrl } from "../components/SettingsPanel";
+import { usePanelLayout } from "../hooks/usePanelLayout";
 import {
-  getFoxgloveWebSocketUrl,
+  DEFAULT_FOXGLOVE_WS_URL,
   useFoxgloveDashboard,
 } from "../services/rosConnection";
 
 export default function Dashboard(): React.ReactElement {
-  const foxgloveUrl = getFoxgloveWebSocketUrl();
-  const foxglove = useFoxgloveDashboard(foxgloveUrl);
+  const [wsUrl, setWsUrl] = useState<string>(() =>
+    loadSavedWsUrl(DEFAULT_FOXGLOVE_WS_URL)
+  );
+
+  const foxglove = useFoxgloveDashboard(wsUrl);
+  const { layoutState, addPanel, removePanel, onLayoutChange } = usePanelLayout();
 
   return (
     <div className="dashboard-container">
@@ -26,63 +31,31 @@ export default function Dashboard(): React.ReactElement {
       </div>
 
       <div className="dashboard-header">
-        <h1 className="dashboard-title">Multi-Data Robot Dashboard</h1>
+        <h1 className="dashboard-title" style={{ margin: 0 }}>Swarm Sense</h1>
       </div>
 
-      <p className="dashboard-title" style={{ fontSize: "18px", marginBottom: "20px" }}>
-        Hussam Abubakr | Jeana Chapman | Emiliano de la Garza | Jewel Littlefield | Jack Sapp | Hayla Turney
-      </p>
-
-      <div className="toolbar">
-        <RecordButton topics={foxglove.discoveredTopics} wsUrl={foxgloveUrl} />
+      <div className="toolbar" style={{ marginTop: "16px", paddingRight: "72px" }}>
+        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+          <PanelSelector
+            activePanelIds={layoutState.activePanelIds}
+            onAdd={addPanel}
+            onRemove={removePanel}
+          />
+          <SettingsPanel
+            currentUrl={wsUrl}
+            connectionStatus={foxglove.status}
+            onConnect={setWsUrl}
+          />
+        </div>
+        <RecordButton topics={foxglove.discoveredTopics} wsUrl={wsUrl} />
       </div>
 
-      <div className="grid-container">
-        <div className="panel large">
-          <h3 className="panel-title">Camera Feed</h3>
-          <div style={{ flex: 1 }}>
-            <CameraFeed
-              imageSrc={foxglove.imageSrc}
-              format={foxglove.imageFormat}
-              lastUpdated={foxglove.lastUpdateByTopic["/out/compressed"]}
-            />
-          </div>
-        </div>
-
-        <div className="panel">
-          <h3 className="panel-title">Position Panel</h3>
-          <PositionPanel
-            pose={foxglove.pose}
-            lastUpdated={foxglove.lastUpdateByTopic["/robot1/odom"]}
-          />
-        </div>
-
-        <div className="panel">
-          <h3 className="panel-title">Battery</h3>
-          <BatteryPanel />
-        </div>
-
-        <div className="panel">
-          <h3 className="panel-title">Acceleration</h3>
-          <AccelerationPanel
-            imu={foxglove.imu}
-            lastUpdated={foxglove.lastUpdateByTopic["/robot1/imu"]}
-          />
-        </div>
-
-        <div className="panel">
-          <h3 className="panel-title">Status</h3>
-          <StatusPanel
-            status={foxglove.status}
-            errorMessage={foxglove.errorMessage}
-            connectionDetails={foxglove.connectionDetails}
-            warningMessage={foxglove.warningMessage}
-            clock={foxglove.clock}
-            topics={foxglove.discoveredTopics}
-            lastUpdated={foxglove.lastUpdateByTopic["/clock"]}
-          />
-        </div>
-      </div>
+      <PanelGrid
+        dashboardState={foxglove}
+        layoutState={layoutState}
+        onLayoutChange={onLayoutChange}
+        onRemovePanel={removePanel}
+      />
     </div>
   );
 }

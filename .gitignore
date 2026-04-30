@@ -9,6 +9,11 @@ node_modules
 # Build artifacts
 dist
 *.foxe
+electron-dist/
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+vite.config.d.ts
 
 # IDE / Editor specific
 .vscode/
